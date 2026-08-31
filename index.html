@@ -381,6 +381,31 @@
     animation: pulso 1.8s infinite ease-in-out;
   }
 
+  .volver-btn{
+    display:flex;
+    align-items:center;
+    gap: 8px;
+    margin-top: 46px;
+    background: linear-gradient(135deg, var(--oro-claro), var(--oro));
+    border: none;
+    color: #fff;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(0.8rem, 3vw, 0.9rem);
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor:pointer;
+    box-shadow: 0 8px 16px -6px rgba(160,90,20,0.5);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .volver-btn:active{
+    transform: scale(0.95);
+    box-shadow: 0 4px 10px -4px rgba(160,90,20,0.5);
+  }
+  .volver-flecha{
+    font-size: 1.1rem;
+    line-height:1;
+  }
+
   /* CONFETI */
   .confeti{
     position: fixed;
@@ -536,7 +561,7 @@
       <button class="quitar-foto-flor" id="quitarFotoFlor">✕</button>
     </div>
 
-    <p class="frase-revelacion">En este día especial, todos tenemos un mensaje para ti.</p>
+    <p class="frase-revelacion">En este día especial, tenemos un mensaje para ti.</p>
 
     <div class="flecha-scroll">⌄</div>
     <div class="sobre-wrap" id="sobreWrap">
@@ -545,6 +570,11 @@
       <div class="sello-cera"><span>G</span></div>
     </div>
     <p class="texto-sobre">Toca la carta para leerla</p>
+
+    <button class="volver-btn" id="volverBtn" title="Volver al regalo">
+      <span class="volver-flecha">↺</span>
+      <span>Volver al regalo</span>
+    </button>
   </section>
 
 </div>
@@ -609,6 +639,22 @@
       seccionRevelacion.classList.add('visible');
     }, 550);
   }
+
+  function reiniciarRegalo(){
+    toques = 0;
+    puntos.forEach(function(p){ p.classList.remove('lleno'); });
+    cajaTapa.style.transform = '';
+    cajaTapa.style.opacity = '';
+    moño.style.transform = '';
+    moño.style.opacity = '';
+
+    seccionRevelacion.classList.remove('visible');
+    seccionRegalo.classList.remove('oculto');
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  document.getElementById('volverBtn').addEventListener('click', reiniciarRegalo);
 
   function lanzarConfeti(){
     const colores = ['#e08a3c','#f0c15c','#c98f3a','#f2a54a','#e3b35c','#fbdca0'];
